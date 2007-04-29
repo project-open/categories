@@ -447,7 +447,9 @@ comment on column category_search_results.similarity is '
 \i category-package.sql
 \i category-link-package.sql
 \i category-synonym-package.sql
+\i categories-relation.sql
 
 \i categories-permissions.sql
 
 \i categories-init.sql
+

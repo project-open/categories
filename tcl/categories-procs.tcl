@@ -20,6 +20,7 @@ ad_proc -public category::add {
     {-deprecated_p "f"}
     {-user_id ""}
     {-creation_ip ""}
+    -noflush:boolean
 } {
     Insert a new category. The same translation will be added in the default
     language if it's in a different language.
@@ -33,6 +34,9 @@ ad_proc -public category::add {
     @option parent_id id of the parent category. "" if top level category.
     @option user_id user that adds the category. [ad_conn user_id] used by default.
     @option creation_ip ip-address of the user that adds the category. [ad_conn peeraddr] used by default.
+    @option noflush defer calling category_tree::flush_cache (which if adding multiple categories to 
+                    a large tree can be very expensive).  note that if you set this flag you must
+                    call category_tree::flush_cache once the adds are complete.
     @return category_id
     @author Timo Hentschel (timo@timohentschel.de)
 } {
@@ -47,13 +51,18 @@ ad_proc -public category::add {
     }
     db_transaction {
         set category_id [db_exec_plsql insert_category ""]
-
+        set translations [list $locale $name]
         set default_locale [ad_parameter DefaultLocale acs-lang "en_US"]
         if {$locale != $default_locale} {
-    	db_exec_plsql insert_default_category ""
+            lappend translations $default_locale $name
+            db_exec_plsql insert_default_category ""
         }
-        category_tree::flush_cache $tree_id
-        flush_translation_cache $category_id
+        if {!$noflush_p} {
+            category_tree::flush_cache $tree_id
+        }
+        # JCD: avoid doing a query and set the translation cache directly
+        # flush_translation_cache $category_id
+        nsv_set categories $category_id [list $tree_id $translations]
     }
     return $category_id
 }
@@ -100,7 +109,7 @@ ad_proc -public category::delete {
     category_id
 } {
     Deletes a category.
-    category_tree:flush_cache should be used afterwards.
+    category_tree::flush_cache should be used afterwards.
 
     @option batch_mode Indicates that the cache for category translations
                        should not be flushed. Useful when deleting several
@@ -189,16 +198,38 @@ ad_proc -public category::map_object {
     }
 }
 
-ad_proc -public category::get_mapped_categories { object_id } {
-    Gets the list of categories mapped to an object.
+ad_proc -public category::get_mapped_categories { 
+    {-tree_id {}}
+    object_id 
+} {
+    Gets the list of categories mapped to an object. If tree_id is provided 
+    return only the categories mapped from the given tree.
 
     @param object_id object of which we want to know the mapped categories.
     @return tcl-list of category_ids
     @author Timo Hentschel (timo@timohentschel.de)
 } {
-    set result [db_list get_mapped_categories ""]
+    if { ![empty_string_p $tree_id] } {
+        set result [db_list get_filtered ""]
+    } else {
+        set result [db_list get_mapped_categories ""]
+    }
 
     return $result
+}
+
+ad_proc -public category::get_id { 
+    name
+    {locale en_US}
+} {
+    Gets the id of a category given a name.
+
+    @param name the name of the category to retrieve
+    @param locale the locale in which the name is supplied
+    @return the category id or empty string it no category was found
+    @author Lee Denison (lee@xarg.co.uk)
+} {
+    return [db_list get_category_id {}]
 }
 
 ad_proc -public category::reset_translation_cache { } {
@@ -260,10 +291,32 @@ ad_proc -public category::get_name {
         # exact match: found name for this locale
         return $name
     }
+
+    # try default locale for this language
+    set language [lindex [split $locale "_"] 0]
+    set locale [lang::util::default_locale_from_lang $language]
+    if { ![catch { set name $cat_lang($locale) }] } {
+        # exact match: found name for this default language locale
+        return $name
+    }
+    
+    # Trying system locale for package (or site-wide)
+    set locale [lang::system::locale]
+    if { ![catch { set name $cat_lang($locale) }] } {
+        return $name
+    }
+
+    # Trying site-wide system locale
+    set locale [lang::system::locale -site_wide]
+    if { ![catch { set name $cat_lang($locale) }] } {
+        return $name
+    }
+
+    # Resort to en_US
     if { ![catch { set name $cat_lang([ad_parameter DefaultLocale acs-lang "en_US"]) }] } {
-        # default locale found
         return $name
     } 
+
     # tried default locale, but nothing found
     return {}
 }

@@ -1,6 +1,17 @@
 <?xml version="1.0"?>
 <queryset>
 
+<fullquery name="category::get_id.get_category_id">      
+      <querytext>
+      
+		select category_id
+		from category_translations
+		where name = :name
+		and locale = :locale
+	    
+      </querytext>
+</fullquery>
+
 <fullquery name="category::update.check_category_existence">      
       <querytext>
       
@@ -27,8 +38,11 @@
       <querytext>
       
 			insert into category_object_map (category_id, object_id)
-			values (:category_id, :object_id)
-		    
+			select :category_id, :object_id
+                        where not exists (select 1
+                                          from category_object_map
+                                          where category_id = :category_id
+                                            and object_id = :object_id);
       </querytext>
 </fullquery>
 
@@ -60,7 +74,16 @@
       </querytext>
 </fullquery>
 
- 
+<fullquery name="category::get_mapped_categories.get_filtered">
+        <querytext>
+                SELECT category_object_map.category_id
+                FROM category_object_map, categories
+                WHERE object_id = :object_id 
+                  AND tree_id = :tree_id
+                  AND category_object_map.category_id = categories.category_id
+        </querytext>
+</fullquery>
+
 <fullquery name="category::reset_translation_cache.reset_translation_cache">      
       <querytext>
       
@@ -80,8 +103,7 @@
 	    from category_translations t, categories c
 	    where t.category_id = :category_id
 	    and t.category_id = c.category_id
-	    order by t.locale
-	
+
       </querytext>
 </fullquery>
 

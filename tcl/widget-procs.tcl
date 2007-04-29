@@ -20,12 +20,20 @@ ad_proc -public template::widget::category { element_reference tag_attributes } 
     upvar $element_reference element
 
     if { [info exists element(html)] } {
-	array set attributes $element(html)
+      	array set attributes $element(html)
+      	array set ms_attributes $element(html)
     }
+
     array set attributes $tag_attributes
     array set ms_attributes $tag_attributes
+
+    if { ![info exists element(display_widget)] } {
+        set display_widget select
+    } else {
+        set display_widget $element(display_widget)
+    }
     set ms_attributes(multiple) {}
-    
+
     set all_single_p [info exists attributes(single)]
 
     # Determine the size automatically for a multiselect
@@ -71,6 +79,8 @@ ad_proc -public template::widget::category { element_reference tag_attributes } 
 
     if { ![empty_string_p $object_id] && ![info exists element(submit)] } {
         set mapped_categories [category::get_mapped_categories $object_id]
+    } elseif { ![empty_string_p $element(values)] && ![info exists element(submit)] } {
+	set mapped_categories $element(values)
     } else {
 	set mapped_categories [ns_querygetall $element(id)]
 	# QUIRK: ns_querygetall returns a single-element list {{}} for no values
@@ -83,17 +93,32 @@ ad_proc -public template::widget::category { element_reference tag_attributes } 
     if { [empty_string_p $tree_id] } {
         set mapped_trees [category_tree::get_mapped_trees $package_id]
     } else {
-        set mapped_trees [list [list $tree_id [category_tree::get_name $tree_id] $subtree_id $assign_single_p $require_category_p]]
+        set mapped_trees {}
+        foreach one_tree $tree_id one_subtree $subtree_id assign_single $assign_single_p require_category $require_category_p {
+            if {[empty_string_p $assign_single]} {
+                set assign_single f
+            }
+            if {[empty_string_p $require_category]} {
+                set require_category f
+            }
+            lappend mapped_trees [list $one_tree [category_tree::get_name $one_tree] $one_subtree $assign_single $require_category]
+        }
     }
 
     foreach mapped_tree $mapped_trees {
 	util_unlist $mapped_tree tree_id tree_name subtree_id assign_single_p require_category_p
-	set tree_name [ad_quotehtml $tree_name]
+	set tree_name [ad_quotehtml [lang::util::localize $tree_name]]
 	set one_tree [list]
+
+        if { $require_category_p == "t" } { 
+            set required_mark "<span class=\"form-required-mark\">*</span>"
+        } else {
+            set required_mark {}
+        }
 
 	foreach category [category_tree::get_tree -subtree_id $subtree_id $tree_id] {
 	    util_unlist $category category_id category_name deprecated_p level
-	    set category_name [ad_quotehtml $category_name]
+	    set category_name [ad_quotehtml [lang::util::localize $category_name]]
 	    if { $level>1 } {
 		set category_name "[string repeat "&nbsp;" [expr 2*$level -4]]..$category_name"
 	    }
@@ -101,7 +126,7 @@ ad_proc -public template::widget::category { element_reference tag_attributes } 
 	}
 
         if { [llength $mapped_trees] > 1 } {
-            append output " $tree_name\: "
+            append output "<div class=\"categorySelect\"><div class=\"categoryTreeName\">$tree_name$required_mark</div>"
 	}
 
 	if {$assign_single_p == "t" || $all_single_p} {
@@ -109,14 +134,17 @@ ad_proc -public template::widget::category { element_reference tag_attributes } 
             if { $require_category_p == "f" } {
                 set one_tree [concat [list [list "" ""]] $one_tree]
             }
-	    append output [template::widget::menu $element(name) $one_tree $mapped_categories attributes $element(mode)]
+	    append output [template::widget::menu $element(name) $one_tree $mapped_categories attributes $element(mode) $display_widget]
 	} else {
 	    # multiselect widget (if user didn't override with single option)
-	    append output [template::widget::menu $element(name) $one_tree $mapped_categories ms_attributes $element(mode)]
+	    append output [template::widget::menu $element(name) $one_tree $mapped_categories ms_attributes $element(mode) $display_widget]
 	}
+	if { [llength $mapped_trees] > 1 } {
+            append output "</div>"
+        }
     }
 
-    return $output
+    return [lang::util::localize $output]
 }
 
 ad_proc -public template::data::validate::category { value_ref message_ref } {

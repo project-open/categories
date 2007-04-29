@@ -20,7 +20,7 @@ ad_page_contract {
     used_categories:multirow
 }
 
-set user_id [ad_maybe_redirect_for_registration]
+set user_id [auth::require_login]
 permission::require_permission -object_id $tree_id -privilege category_tree_write
 
 array set tree [category_tree::get_data $tree_id $locale]
@@ -41,6 +41,7 @@ if {[llength $instance_list] > 0} {
 
 set delete_url [export_vars -no_empty -base tree-delete-2 {tree_id locale object_id}]
 set cancel_url [export_vars -no_empty -base tree-view {tree_id locale object_id}]
+set usage_url [export_vars -no_empty -base tree-usage {tree_id}]
 
 template::multirow create used_categories category_id category_name view_url
 

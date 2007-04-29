@@ -19,7 +19,7 @@ ad_page_contract {
     can_write_p:onevalue
 }
 
-set user_id [ad_maybe_redirect_for_registration]
+set user_id [auth::require_login]
 
 array set tree [category_tree::get_data $tree_id $locale]
 if {$tree(site_wide_p) == "f"} {
@@ -31,9 +31,9 @@ set tree_description $tree(description)
 
 set page_title "Category Tree \"$tree_name\""
 if {[info exists object_id]} {
-    set context_bar [list [category::get_object_context $object_id] [list [export_vars -no_empty -base object-map {locale object_id}] "Category Management"] $tree_name]
+    set context_bar [list [category::get_object_context $object_id] [list [export_vars -no_empty -base object-map {locale object_id}] "[_ categories.cadmin]"] $tree_name]
 } else {
-    set context_bar [list [list ".?[export_vars -no_empty {locale}]" "Category Management"] $tree_name]
+    set context_bar [list [list ".?[export_vars -no_empty {locale}]" "[_ categories.cadmin]"] $tree_name]
 }
 
 set can_write_p [permission::permission_p -object_id $tree_id -privilege category_tree_write]
