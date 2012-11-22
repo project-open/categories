@@ -267,7 +267,18 @@ create table category_links (
 
 create unique index category_links_rev_ix on category_links (to_category_id, from_category_id);
 
-create sequence category_links_id_seq;
+
+
+create or replace function inline_0 ()
+returns integer as $body$ declare v_count  integer; begin
+        select count(*) into v_count from
+	pg_class where lower(relname) = 'category_links_id_seq';
+        IF v_count = 0 THEN create sequence category_links_id_seq; END IF;
+        return 1;
+end;$body$ language 'plpgsql';
+select inline_0 ();
+drop function inline_0 ();
+
 
 comment on table category_links is '
   Stores directed graph of linked categories. If category A
@@ -310,7 +321,20 @@ create index category_synonyms_locale_ix on category_synonyms(category_id, local
 -- to sort synonyms by name
 create index category_synonyms_name_ix on category_synonyms(category_id, name);
 
-create sequence category_synonyms_id_seq;
+
+
+
+create or replace function inline_0 ()
+returns integer as $body$ declare v_count  integer; begin
+        select count(*) into v_count from
+	pg_class where lower(relname) = 'category_synonyms_id_seq';
+        IF v_count = 0 THEN create sequence category_synonyms_id_seq; END IF;
+        return 1;
+end;$body$ language 'plpgsql';
+select inline_0 ();
+drop function inline_0 ();
+
+
 
 comment on table category_synonyms is '
   Stores multilingual synonyms of the categories.
@@ -372,7 +396,18 @@ create table category_search (
 -- to delete old queries
 create index category_search_date_ix on category_search(last_queried);
 
-create sequence category_search_id_seq;
+
+
+create or replace function inline_0 ()
+returns integer as $body$ declare v_count  integer; begin
+        select count(*) into v_count from
+	pg_class where lower(relname) = 'category_search_id_seq';
+        IF v_count = 0 THEN create sequence category_search_id_seq; END IF;
+        return 1;
+end;$body$ language 'plpgsql';
+select inline_0 ();
+drop function inline_0 ();
+
 
 comment on table category_search is '
   Stores users multilingual search texts for category synonyms.
