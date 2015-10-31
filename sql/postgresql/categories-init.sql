@@ -16,19 +16,19 @@ BEGIN
 	where  contract_name = 'AcsObject';
 	IF v_count > 0 THEN return 1; END IF;
 
-	select acs_sc_contract__new(
+	PERFORM acs_sc_contract__new(
 	    'AcsObject',                -- contract_name
 	    'Acs Object Id Handler'     -- contract_desc
 	);
-	select acs_sc_msg_type__new(
+	PERFORM acs_sc_msg_type__new(
 	    'AcsObject.PageUrl.InputType',      -- msg_type_name
 	    'object_id:integer'                 -- msg_type_spec
 	);
-	select acs_sc_msg_type__new(
+	PERFORM acs_sc_msg_type__new(
 	    'AcsObject.PageUrl.OutputType',     -- msg_type_name
 	    'page_url:string'                   -- msg_type_spec
 	);
-	select acs_sc_operation__new(
+	PERFORM acs_sc_operation__new(
 	    'AcsObject',                        -- contract_name
 	    'PageUrl',                          -- operation_name
 	    'Returns the package specific url to a page that displays an object', -- operation_desc
