@@ -36,7 +36,7 @@ set user_id [auth::require_login]
 set page_title "Browse categories"
 
 set context_bar [list "Browse categories"]
-set url_vars [export_url_vars tree_ids:multiple category_ids:multiple subtree_p letter join package_id]
+set url_vars [export_vars -url { tree_ids:multiple category_ids:multiple subtree_p letter join package_id]
 set form_vars [export_form_vars tree_ids:multiple orderby subtree_p letter package_id]
 
 db_transaction {
