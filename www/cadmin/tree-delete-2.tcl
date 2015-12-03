@@ -5,10 +5,10 @@ ad_page_contract {
     @author Timo Hentschel (timo@timohentschel.de)
     @cvs-id $Id:
 } {
-    tree_id:integer,notnull
+    tree_id:naturalnum,notnull
     {locale ""}
-    object_id:integer,optional
-    ctx_id:integer,optional
+    object_id:naturalnum,optional
+    ctx_id:naturalnum,optional
 }
 
 set user_id [auth::require_login]
@@ -24,7 +24,7 @@ if {[llength $instance_list] > 0} {
 category_tree::delete $tree_id
 
 if {![info exists object_id]} {
-    ad_returnredirect ".?[export_vars -no_empty {locale ctx_id}]"
+    ad_returnredirect [export_vars -base . -no_empty {locale ctx_id}]
 } else {
     ad_returnredirect [export_vars -no_empty -base object-map {locale object_id ctx_id}]
 }

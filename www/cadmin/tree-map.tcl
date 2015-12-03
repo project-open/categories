@@ -5,10 +5,10 @@ ad_page_contract {
     @author Timo Hentschel (timo@timohentschel.de)
     @cvs-id $Id:
 } {
-    tree_id:integer
+    tree_id:naturalnum,notnull
     {locale ""}
-    object_id:integer,notnull
-    ctx_id:integer,optional
+    object_id:naturalnum,notnull
+    ctx_id:naturalnum,optional
 } -properties {
     page_title:onevalue
     context_bar:onevalue
@@ -25,17 +25,16 @@ if {$tree_data(site_wide_p) == "f"} {
     permission::require_permission -object_id $tree_id -privilege category_tree_read
 }
 
-set page_title "Select subtree of \"$tree_name\" to map"
-
+set page_title [_ categories.Tree_map_title]
 set context_bar [list \
    [category::get_object_context $object_id] \
    [list [export_vars -no_empty -base object-map {locale object_id ctx_id}] [_ categories.cadmin]] \
-   "Map subtree"]
+   "#categories.Map_subtree#"]
 
 template::multirow create tree category_id category_name level left_indent map_url
 
 foreach category [category_tree::get_tree -all $tree_id $locale] {
-    util_unlist $category category_id category_name deprecated_p level
+    lassign $category category_id category_name deprecated_p level
 
     template::multirow append tree $category_id $category_name $level \
 	[string repeat "&nbsp;" [expr {($level-1)*5}]] \
@@ -44,18 +43,18 @@ foreach category [category_tree::get_tree -all $tree_id $locale] {
 
 template::list::create \
     -name tree \
-    -no_data "None" \
+    -no_data "#categories.None#" \
     -elements {
 	category_name {
-	    label "Name"
+	    label "#acs-subsite.Name#"
 	    display_template {
 		@tree.left_indent;noquote@ @tree.category_name@
 	    }
 	}
 	map {
-	    label "Action"
+	    label "#categories.Action#"
 	    display_template {
-		<a href="@tree.map_url@">Map this subtree</a>
+		<a href="@tree.map_url@">#categories.Map_this_subtree#</a>
 	    }
 	}
     }

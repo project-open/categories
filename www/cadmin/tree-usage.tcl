@@ -5,10 +5,10 @@ ad_page_contract {
     @author Timo Hentschel (timo@timohentschel.de)
     @cvs-id $Id:
 } {
-    tree_id:integer,notnull
+    tree_id:naturalnum,notnull
     {locale ""}
-    object_id:integer,optional
-    ctx_id:integer,optional
+    object_id:naturalnum,optional
+    ctx_id:naturalnum,optional
 } -properties {
     page_title:onevalue
     context_bar:onevalue
@@ -28,12 +28,12 @@ if {$tree(site_wide_p) == "f"} {
 
 set tree_name $tree(tree_name)
 set tree_description $tree(description)
-set page_title "Modules using Category Tree \"$tree_name\""
+set page_title [_ categories.Usage_title]
 
 set context_bar [category::context_bar $tree_id $locale \
                      [value_if_exists object_id] \
                      [value_if_exists ctx_id]]
-lappend context_bar "Usage"
+lappend context_bar [_ categories.Usage]
 
 
 template::multirow create modules package object_id object_name package_id instance_name read_p unmap_url
@@ -42,7 +42,7 @@ set instance_list [category_tree::usage $tree_id]
 
 set instances_without_permission 0
 foreach instance $instance_list {
-    util_unlist $instance package object_id object_name package_id instance_name read_p
+    lassign $instance package object_id object_name package_id instance_name read_p
     set unmap_url [export_vars -no_empty -base tree-unmap {tree_id object_id ctx_id}]
 
     if {$read_p == "t"} {

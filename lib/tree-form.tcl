@@ -12,16 +12,16 @@ ad_form -name tree_form \
     -export { locale object_id ctx_id } \
     -form {
     {tree_id:key}
-    {tree_name:text {label "Name"} {html {size 50 maxlength 50}}}
-    {language:text(select) {label "Language"} {options $languages}}
-    {description:text(textarea),optional {label "Description"} {html {rows 5 cols 80}}}
+    {tree_name:text {label "#acs-subsite.Name#"} {html {size 50 maxlength 50}}}
+    {language:text(select) {label "#categories.Language#"} {options $languages}}
+    {description:text(textarea),optional {label "#categories.Description#"} {html {rows 5 cols 80}}}
 } -new_request {
     permission::require_permission -object_id $package_id -privilege category_admin
     set language $locale
 } -edit_request {
     permission::require_permission -object_id $tree_id -privilege category_tree_write
     set action Edit
-    util_unlist [category_tree::get_translation $tree_id $locale] tree_name description
+    lassign [category_tree::get_translation $tree_id $locale] tree_name description
     set language $locale
 } -on_submit {
     set description [util_close_html_tags $description 4000]

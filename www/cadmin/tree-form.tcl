@@ -4,10 +4,10 @@ ad_page_contract {
     @author Timo Hentschel (timo@timohentschel.de)
     @cvs-id $Id:
 } {
-    tree_id:integer,optional
+    tree_id:naturalnum,optional
     {locale ""}
-    object_id:integer,optional
-    ctx_id:integer,optional
+    object_id:naturalnum,optional
+    ctx_id:naturalnum,optional
 } -properties {
     context_bar:onevalue
     page_title:onevalue
@@ -16,9 +16,9 @@ ad_page_contract {
 auth::require_login
 
 if { ![ad_form_new_p -key tree_id] } {
-    set page_title "Edit tree"
+    set page_title "#categories.Edit_tree#"
 } else {
-    set page_title "Add tree"
+    set page_title "#categories.Add_tree#"
 }
 
 if { [info exists object_id] } {
@@ -28,7 +28,7 @@ if { [info exists object_id] } {
           [_ categories.cadmin]]]
 } else {
     set context_bar [list \
-          [list ".?[export_vars -no_empty {locale ctx_id}]" \
+          [list [export_vars -base . -no_empty {locale ctx_id}] \
           [_ categories.cadmin]]]
 }
 lappend context_bar $page_title
