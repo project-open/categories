@@ -2,6 +2,7 @@
 <message_catalog package_key="categories" locale="nl_NL" charset="ISO-8859-1">
 
   <msg key="cadmin">Categorieënbeheer</msg>
+  <msg key="Categories">Categorieën</msg>
   <msg key="code_export">Exporteer code om categoriebomen opnieuw aan te maken</msg>
   <msg key="code_necessary">Tcl-code om betreffende categoriebomen opnieuw aan te maken</msg>
   <msg key="export">Exporteren</msg>
