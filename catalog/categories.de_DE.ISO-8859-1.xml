@@ -51,6 +51,7 @@
   <msg key="lt_Are_you_sure_you_want_3">Sind Sie sicher, dass Sie den Kategorienbaum &#34;%tree_name%&#34; löschen wollen:</msg>
   <msg key="lt_Are_you_sure_you_want_4">Sind Sie sicher, dass Sie die Zuordnung des Kategorienbaums &#34;%tree_name%&#34; zum Wiki &#34;%object_name%&#34; aufheben wollen?</msg>
   <msg key="lt_Categories_still_used">Kategorien in Verwendung</msg>
+  <msg key="lt_Category_Administrati">Admin Kategorien</msg>
   <msg key="lt_Category_trees_availa">Kategorienbäume, die zugeordnet werden können</msg>
   <msg key="lt_Category_trees_mapped">Kategorienbäume, die dem Wiki &#34;%object_name%&#34; zugeordnet sind</msg>
   <msg key="lt_Create_and_map_a_new_">Neuen Kategorienbaum erstellen und zuordnen</msg>
@@ -101,6 +102,8 @@
   <msg key="Usage">Verwendung</msg>
   <msg key="Usage_title">Anwendungen, die den Kategorienbaum &#34;%tree_name%&#34; verwenden</msg>
   <msg key="Widget">Optionen</msg>
+  <msg key="Widget_checkbox">Checkbox - Benutzer können eine Seite mehreren Kategorien zuweisen</msg>
+  <msg key="Widget_multiselect">Multiselect - Benutzer können eine Seite mehreren Kategorien zuweisen</msg>
   <msg key="Widget_radio">Radio</msg>
   <msg key="Widget_required_category">Muss eine Seite mindestens einer Kategorie zugewiesen werden?</msg>
   <msg key="Widget_select">Auswählen</msg>
