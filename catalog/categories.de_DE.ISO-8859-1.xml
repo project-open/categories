@@ -28,11 +28,11 @@
   <msg key="checked">ausgewählt</msg>
   <msg key="code_export">Code zum Erstellen der Kategorienbäume exportieren</msg>
   <msg key="code_necessary">TCL Code, um ausgewählte Kategoriebäume zu importieren</msg>
-  <msg key="Create_a_new_tree">Neuen Kategorienbaum erstellen</msg>
+  <msg key="Create_a_new_tree">Neuer Kategorienbaum</msg>
   <msg key="Current_categories">Aktuelle Kategorien</msg>
   <msg key="Delete">Löschen</msg>
   <msg key="Delete_action_link_title">Ausgewählte Kategorien löschen</msg>
-  <msg key="Delete_category_link_title">Kategorie und alle Subkategorien löschen</msg>
+  <msg key="Delete_category_link_title">Kategorie mit Subkategorien löschen</msg>
   <msg key="Delete_category_tree_title">Kategorienbaum &#34;%tree_name%&#34; löschen </msg>
   <msg key="Deprecate">Ausblenden</msg>
   <msg key="Deprecate_category_link_title">Ausgewählte Kategorien ausblenden</msg>
