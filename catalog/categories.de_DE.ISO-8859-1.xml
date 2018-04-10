@@ -18,7 +18,6 @@
   <msg key="Add_category">Kategorie hinzufügen</msg>
   <msg key="Add_subcategory_link_title">Subkategorie hinzufügen</msg>
   <msg key="Add_tree">Kategorienbaum hinzufügen</msg>
-  <msg key="AND__">&gt;AND |</msg>
   <msg key="Browse">Durchsuchen</msg>
   <msg key="Browse_link_title">Ausgewählte Kategorienbäume durchsuchen</msg>
   <msg key="cadmin">Kategorien verwalten</msg>
@@ -29,11 +28,11 @@
   <msg key="checked">ausgewählt</msg>
   <msg key="code_export">Code zum Erstellen der Kategorienbäume exportieren</msg>
   <msg key="code_necessary">TCL Code, um ausgewählte Kategoriebäume zu importieren</msg>
-  <msg key="Create_a_new_tree">Neuer Kategorienbaum</msg>
+  <msg key="Create_a_new_tree">Neuen Kategorienbaum erstellen</msg>
   <msg key="Current_categories">Aktuelle Kategorien</msg>
   <msg key="Delete">Löschen</msg>
   <msg key="Delete_action_link_title">Ausgewählte Kategorien löschen</msg>
-  <msg key="Delete_category_link_title">Kategorie mit Subkategorien löschen</msg>
+  <msg key="Delete_category_link_title">Kategorie und alle Subkategorien löschen</msg>
   <msg key="Delete_category_tree_title">Kategorienbaum &#34;%tree_name%&#34; löschen </msg>
   <msg key="Deprecate">Ausblenden</msg>
   <msg key="Deprecate_category_link_title">Ausgewählte Kategorien ausblenden</msg>
@@ -57,7 +56,6 @@
   <msg key="lt_Category_trees_mapped">Kategorienbäume, die dem Wiki &#34;%object_name%&#34; zugeordnet sind</msg>
   <msg key="lt_Create_and_map_a_new_">Neuen Kategorienbaum erstellen und zuordnen</msg>
   <msg key="lt_Explanation_Any_categ">Erklärung: Jede Kategorisierung innerhalb der Quellkategorie erfolgt auch in der Zielkategorie.</msg>
-  <msg key="lt_form_varsnoquote__Com">%form_vars;noquote% combiniert mit [</msg>
   <msg key="lt_object_count_objects_">%object_count% Objekte auf %page_count% Seiten</msg>
   <msg key="lt_Search_for_a_category">Kategorie suchen</msg>
   <msg key="lt_Select_Trees_for_brow">Kategorienbäume zum Durchsuchen auswählen</msg>
@@ -71,7 +69,6 @@
   <msg key="Map_subtree">Subkategorie zuordnen</msg>
   <msg key="Map_this_subtree">Diese Subkategorie zuordnen</msg>
   <msg key="Map_tree">Kategorienbaum zuordnen</msg>
-  <msg key="Mapiing_parameters_subtree_title">categories.Mapiing_parameters_subtree_title</msg>
   <msg key="Mapping_parameters">Zuordnungseinstellungen</msg>
   <msg key="Mapping_parameters_subtree_title">Einstellungen der Zuordnung von Seiten zum Subkategorienbaum &#34;%tree_name% :: %category_name%&#34;</msg>
   <msg key="Mapping_parameters_tree_title">Einstellungen der Zuordnung von Seiten zum Kategorienbaum &#34;%tree_name%&#34;</msg>
@@ -80,7 +77,6 @@
   <msg key="None">Keine</msg>
   <msg key="OK">OK</msg>
   <msg key="optional">optional</msg>
-  <msg key="OR_">&gt;OR ]</msg>
   <msg key="Ordering">Reihenfolge</msg>
   <msg key="Ordering_update">Reihenfolge aktualisieren</msg>
   <msg key="Ordering_update_link_title">Reihenfolge entsprechend der Werte aktualisieren</msg>
