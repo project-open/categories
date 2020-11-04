@@ -53,17 +53,17 @@ apply to an object or its parent is called the <span class="emphasis"><em>enable
 <td>3.1.3</td><td> </td><td>Done</td><td>The <span class="emphasis"><em>enabled trees</em></span> for an
 object can be added as fields in form builder. (Current ad_form
 implementation supports single select and multiple select; all
-enabled trees or none. <tt class="computeroutput">/categories/www/widget</tt> is a deprecated
+enabled trees or none. <kbd class="computeroutput">/categories/www/widget</kbd> is a deprecated
 solution.)</td>
 </tr><tr>
 <td>3.1.4</td><td> </td><td>B</td><td>A GUI for linking any category (even one not in the
 <span class="emphasis"><em>enabled trees</em></span>) to an
 object.</td>
 </tr><tr>
-<td>3.2</td><td>partial</td><td>A</td><td>A GUI to see an object's categories.</td>
+<td>3.2</td><td>partial</td><td>A</td><td>A GUI to see an object&#39;s categories.</td>
 </tr><tr>
 <td>3.2.1</td><td> </td><td>A</td><td>All of the categories which an object belongs to can be
-displayed via an includelet on an object view page. (<tt class="computeroutput">/categories/www/widget</tt>)</td>
+displayed via an includelet on an object view page. (<kbd class="computeroutput">/categories/www/widget</kbd>)</td>
 </tr><tr>
 <td>4</td><td> </td><td>A</td><td>List-builder can sort and filter by category. (Implemented; not
 documented. single-select only.)</td>
@@ -96,5 +96,4 @@ object_id</a> and <a href="http://openacs.org/forums/message-view?message_id=158
 		    rightLink="" rightLabel="" rightTitle=""
 		    homeLink="index" homeLabel="Home" 
 		    upLink="index" upLabel="Up"> 
-		<center><a href="http://openacs.org/doc/requirements.html#comments">View comments
-on this page at openacs.org</a></center>
+		

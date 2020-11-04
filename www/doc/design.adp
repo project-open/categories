@@ -11,17 +11,18 @@ Categories are organized in separate category trees.<br>
 When a package admin clicks on an Administer Categories link, they
 are presented with a page that shows the following items:
 <ul>
-<li>list of trees currently mapped to the object (this "object"
-will be usually a package instance)</li><li>list of trees that can be mapped to the object , those trees
-are just the trees that the admin has the 'category_read'
+<li>list of trees currently mapped to the object (this
+"object" will be usually a package instance)</li><li>list of trees that can be mapped to the object, those trees are
+just the trees that the admin has the 'category_read'
 permission on</li><li>link to create and map a new category tree</li>
 </ul>
 
 Creating a new tree involves entering tree name and description.
 The name must be unique among all the trees.<br>
 
-Upon creation of a tree, the admin is granted the 'category_read'
-and 'category_write' permisssions.<br>
+Upon creation of a tree, the admin is granted the
+'category_read' and 'category_write'
+permissions.<br>
 
 Normally, the category_write permission should not be shared with
 anybody else, in the rare cases when granting this permission to
@@ -29,35 +30,36 @@ another party is needed, site-wide admin intervention will be
 required.
 <p>In addition to mapping an entire tree to an object, admins have
 the option of mapping only a subtree of an existing tree. To do
-that, they have to click on a "Map subtree" link, after which they
-will see a list of tree nodes.<br>
+that, they have to click on a "Map subtree" link, after
+which they will see a list of tree nodes.<br>
 The mapped subtree will consist of all subcategories of the
 category the user selected - the category itself will not be
 included. Note that the mapped subtree will not be a new tree.
 Therefore this option should be used only if an admin plans to use
-the subtree 'as is' and has no intention of making changes to
-it.</p>
+the subtree 'as is' and has no intention of making changes
+to it.</p>
 <p>An alternative solution is available for admins who want to
 create a tree by copying one of the existing trees and subsequently
 playing around with it (moving/adding/deleting categories). To
 accomplish that, they would have to create a new tree, go to the
-admin page for this tree and click on a "Copy existing tree" link.
-They will see a list of available trees to copy. Clicking on the
-"Copy this one" link will result in creating copies of the
-categories from the source trees and placing them in the new
-tree.<br>
+admin page for this tree and click on a "Copy existing
+tree" link. They will see a list of available trees to copy.
+Clicking on the "Copy this one" link will result in
+creating copies of the categories from the source trees and placing
+them in the new tree.<br>
 This operation can be performed several times, each time the copied
 categories will be placed as toplevel categories of the tree.</p>
-<p>As far as unmapping is concerned, this operation doesn't delete
-the mapping between categories and objects.</p>
-<p><b>Permissions</b></p>
+<p>As far as unmapping is concerned, this operation doesn&#39;t
+delete the mapping between categories and objects.</p>
+<p><strong>Permissions</strong></p>
 <p>The creator of the category tree is granted the
 category_tree_read, category_tree_write and
 category_tree_grant_permissions privileges.<br>
 </p>
-<p><b>The operations one can perform on categories are:</b></p>
+<p><strong>The operations one can perform on categories
+are:</strong></p>
 <ul>
-<li>(a) changing of a parent</li><li>(b) adding childen</li><li>(c) deleting</li><li>(d) editing</li><li>(e) phasing in/out</li><li>(f) changing sort key</li>
+<li>(a) changing of a parent</li><li>(b) adding children</li><li>(c) deleting</li><li>(d) editing</li><li>(e) phasing in/out</li><li>(f) changing sort key</li>
 </ul>
 <p>ad (d) You cannot delete a category that has children. Also, you
 cannot delete a category that has objects mapped to it (do we want
@@ -71,7 +73,7 @@ ad (f) sort key is used to order children of the same parent
 category, that is the elements of the tree are sorted first by
 parent, then by the sort key.</p>
 <hr>
-<b>Datamodel</b>
+<strong>Datamodel</strong>
 <p>This table actually stores the information whether the tree is
 side-wide or not.</p>
 <pre>
@@ -84,7 +86,7 @@ create table category_trees (
                                 check (site_wide_p in ('t','f'))
 );
 </pre>
-<p>Here the tree's name and description is stored in different
+<p>Here the tree&#39;s name and description is stored in different
 translations.</p>
 <pre>
 create table category_tree_translations (
@@ -103,8 +105,9 @@ create table category_tree_translations (
 about the parent category. The tree is ordered by a nested index
 (left_ind, right_ind). Sorting is thus accomplished by means of a
 nested set. You can read a <a href="http://www.intelligententerprise.com/001020/celko.jhtml?_requestid=49180">
-description of how nested sets work</a>. This also <i>describes how
-to write queries that sort correctly when using categories</i>.</p>
+description of how nested sets work</a>. This also <em>describes
+how to write queries that sort correctly when using
+categories</em>.</p>
 <pre>
 create table categories (
        category_id                  integer primary key
@@ -168,7 +171,7 @@ create table category_tree_map (
 ) organization index;
 </pre>
 <hr>
-<p><b>Known Limitations</b></p>
+<p><strong>Known Limitations</strong></p>
 <ul>
 <li>The tree order is the same for all translations.</li><li>You can map a tree only once to a package (or other
 object).</li><li>The number of objects mapped to a category is not shown yet.
@@ -177,16 +180,16 @@ for each object.</li><li>There should be browsing widget easily used by other pa
 to let the user browse through all categorized objects.</li>
 </ul>
 <hr>
-<p><b>Integration with other packages</b></p>
+<p><strong>Integration with other packages</strong></p>
 <p>Here are the changes needed to be made to integrate with other
 packages.</p>
 <p>
-<b>index.adp</b><br>
+<strong>index.adp</strong><br>
 Provide an admin-link to
 /categories/cadmin/one-object?object_id=\@package_id\@ to let admins
 map trees to the package instance.</p>
 <p>
-<b>form-page.tcl</b><br>
+<strong>form-page.tcl</strong><br>
 Use this in ad_form to display all mapped category trees and
 selected categories (if editing an object):</p>
 <pre>

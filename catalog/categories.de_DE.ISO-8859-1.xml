@@ -51,7 +51,7 @@
   <msg key="lt_Are_you_sure_you_want_3">Sind Sie sicher, dass Sie den Kategorienbaum &#34;%tree_name%&#34; löschen wollen:</msg>
   <msg key="lt_Are_you_sure_you_want_4">Sind Sie sicher, dass Sie die Zuordnung des Kategorienbaums &#34;%tree_name%&#34; zum Wiki &#34;%object_name%&#34; aufheben wollen?</msg>
   <msg key="lt_Categories_still_used">Kategorien in Verwendung</msg>
-  <msg key="lt_Category_Administrati">Admin Kategorien</msg>
+  <msg key="lt_Category_Administrati">Kategorien verwalten</msg>
   <msg key="lt_Category_trees_availa">Kategorienbäume, die zugeordnet werden können</msg>
   <msg key="lt_Category_trees_mapped">Kategorienbäume, die dem Wiki &#34;%object_name%&#34; zugeordnet sind</msg>
   <msg key="lt_Create_and_map_a_new_">Neuen Kategorienbaum erstellen und zuordnen</msg>
@@ -64,8 +64,8 @@
   <msg key="lt_This_tree_is_not_used">Dieser Kategorienbaum wird nicht genutzt.</msg>
   <msg key="lt_This_tree_is_still_us">Dieser Kategorienbaum wird noch von einigen Anwendungen verwendet. Für eine Liste, klicken Sie bitte</msg>
   <msg key="lt_To_deselect_or_select">Um mehrere Kategorien auszuwählen, verwenden Sie die Strg-Taste auf Ihrer Tastatur.</msg>
-  <msg key="Make_it_Local">Lokal machen</msg>
-  <msg key="Make_it_Site-Wide">Global machen</msg>
+  <msg key="Make_it_Local">Als lokal festlegen</msg>
+  <msg key="Make_it_Site-Wide">Als seitenweit festlegen</msg>
   <msg key="Map_subtree">Subkategorie zuordnen</msg>
   <msg key="Map_this_subtree">Diese Subkategorie zuordnen</msg>
   <msg key="Map_tree">Kategorienbaum zuordnen</msg>
@@ -85,10 +85,10 @@
   <msg key="required">erforderlich</msg>
   <msg key="Restore">Wiederherstellen</msg>
   <msg key="Restore_category_link_title">Ausgewählte Kategorien wiederherstellen</msg>
-  <msg key="Search_string">Suchen</msg>
+  <msg key="Search_string">Suchbegriff</msg>
   <msg key="selected">ausgewählt</msg>
   <msg key="single">einfach</msg>
-  <msg key="SiteWide_tree">Globaler Baum</msg>
+  <msg key="SiteWide_tree">seitenweiter Baum</msg>
   <msg key="This_tree_is_local">Dieser Baum ist lokal</msg>
   <msg key="Tree_copy">Kategorienbaum übernehmen</msg>
   <msg key="Tree_copy_title">Einen Kategorienbaum in &#34;%tree_name%&#34; übernehmen</msg>
@@ -102,8 +102,8 @@
   <msg key="Usage">Verwendung</msg>
   <msg key="Usage_title">Anwendungen, die den Kategorienbaum &#34;%tree_name%&#34; verwenden</msg>
   <msg key="Widget">Optionen</msg>
-  <msg key="Widget_checkbox">Checkbox - Benutzer können eine Seite mehreren Kategorien zuweisen</msg>
-  <msg key="Widget_multiselect">Multiselect - Benutzer können eine Seite mehreren Kategorien zuweisen</msg>
+  <msg key="Widget_checkbox">Checkbox - User/innen können eine Seite mehreren Kategorien zuweisen</msg>
+  <msg key="Widget_multiselect">Multiselect - User/innen können eine Seite mehreren Kategorien zuweisen</msg>
   <msg key="Widget_radio">Radio</msg>
   <msg key="Widget_required_category">Muss eine Seite mindestens einer Kategorie zugewiesen werden?</msg>
   <msg key="Widget_select">Auswählen</msg>
